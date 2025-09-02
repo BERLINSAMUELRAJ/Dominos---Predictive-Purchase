@@ -182,5 +182,3 @@ The system should:
 - Ensure **reproducibility** via environment/dependency management.  
 
 ---
-
-## Repository Structure (Suggested)  
