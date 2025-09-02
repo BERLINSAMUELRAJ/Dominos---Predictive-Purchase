@@ -1,9 +1,11 @@
-# Dominos - Predictive Purchase Order System  
+# Dominos - Predictive Purchase Order System
 
 ![](https://github.com/BERLINSAMUELRAJ/Dominos---Predictive-Purchase/blob/main/481661596_122210809634205100_6870617675683039272_n.jpg)
 
 ## Project Overview  
 This project focuses on building a **Predictive Purchase Order System** for **Dominos**. The goal is to optimize the ingredient ordering process by predicting future pizza sales and generating accurate purchase orders. By forecasting sales, Dominos can ensure optimal ingredient availability, reduce waste, and avoid stockouts — directly improving customer satisfaction and operational efficiency.  
+
+This project also aims to optimize Domino’s ingredient ordering process by predicting future pizza sales and generating actionable purchase orders. By forecasting demand accurately, Domino’s can ensure the right inventory levels, reduce wastage, and improve operational efficiency.
 
 ---
 
@@ -46,44 +48,97 @@ The system should:
 
 ## Approach  
 
-### 1️⃣ Data Preprocessing & Exploration  
-- **Data Cleaning:** Handle missing values, inconsistencies, and outliers.  
-- **Formatting:** Convert date/time formats and standardize categories.  
-- **EDA:** Identify sales trends, seasonality, and key demand drivers.  
-- **Visualization:** Explore sales by pizza type, day of week, month, promotions, and holidays.  
+### 1️⃣ Data Ingestion & Cleaning
+**Input:** `merged_data` (sales + ingredients)  
+**Processes:**  
+- Convert `order_date` → datetime format  
+- Handle missing values (`daily_quantity`, `Items_Qty_In_Grams`)  
+- Filter out low-data pizzas to ensure robust forecasting  
 
-### 2️⃣ Sales Prediction  
-- **Feature Engineering:** Extract time-related features (day, month, holiday, promo).  
-- **Model Selection:**  
-  - Traditional: ARIMA, SARIMA  
-  - Advanced: Facebook Prophet, LSTM, Regression Models  
-- **Training:** Train predictive models using historical sales data.  
-- **Evaluation:** Evaluate models using **Mean Absolute Percentage Error (MAPE)**.  
-
-### 3️⃣ Purchase Order Generation  
-- **Forecasting:** Predict pizza sales for the upcoming week.  
-- **Ingredient Mapping:** Translate sales forecasts into ingredient requirements using the ingredient dataset.  
-- **Purchase Order Creation:** Generate a structured order report specifying each ingredient’s required quantity.  
+**Tools:** Python, Pandas
 
 ---
 
-## Results
+### 2️⃣ Exploratory Data Analysis (EDA)
+**Goal:** Understand sales trends & patterns  
+**Processes:**  
+- Aggregate sales per pizza and per day  
+- Identify top-selling pizzas  
+- Visualize trends (optional)  
+
+**Tools:** Pandas, Matplotlib, Seaborn
+
+---
+
+### 3️⃣ Time Series Forecasting
+**Goal:** Predict future pizza demand  
+**Processes:**  
+- Build Prophet model per pizza (`daily_quantity`)  
+- Compare with SARIMA and Random Forest models  
+- Handle weekly/yearly seasonality  
+- Forecast daily pizza sales for the next 7 days  
+
+**Tools:** Prophet, Statsmodels (SARIMA), Scikit-learn
+
+---
+
+### 4️⃣ Forecast to Ingredient Mapping
+**Goal:** Translate pizza forecasts into raw material demand  
+**Processes:**  
+- Merge forecast with `pizza_ingredients` table  
+- Calculate `ingredient_demand_grams = forecast_qty * Items_Qty_In_Grams`  
+- Convert to kilograms (`ingredient_demand_kg`)  
+
+**Tools:** Pandas
+
+---
+
+### 5️⃣ Purchase Order Creation
+**Goal:** Generate actionable inventory plan  
+**Processes:**  
+- Aggregate ingredient demand per day  
+- Generate a purchase order table (`ingredient`, `quantity`, `day`)  
+- Export to Excel for operational use  
+
+**Output:** Comprehensive purchase order for the next 7 days  
+**Tools:** Pandas, Openpyxl
+
+---
+
+### 6️⃣ Model Evaluation
+**Goal:** Measure accuracy of forecasts  
+**Processes:**  
+- Compare Actual vs Forecasted sales  
+- Calculate MAPE for Prophet, SARIMA, and Random Forest  
+- Plot Actual vs Forecasted with MAPE annotations  
+
+**Tools:** Pandas, Numpy, Matplotlib
+
+---
+
+### 7️⃣ Key Skills Applied
+- **Python & Libraries:** Pandas, Numpy, Matplotlib, Seaborn, Prophet, Scikit-learn  
+- **Time Series Analysis:** Prophet, SARIMA, Forecasting  
+- **Predictive Modeling:** Random Forest, Regression  
+- **Inventory Management:** Ingredient calculation, purchase order generation  
+- **Data Science Workflow:** Data cleaning → EDA → Modeling → Evaluation → Business action
+
+---
+
+### 8️⃣ Results & Insights
 
 ![](https://github.com/BERLINSAMUELRAJ/Dominos---Predictive-Purchase/blob/main/order-Domino%E2%80%99s-Pizza-with-technology-2.jpg)
 
-- **Accurate sales predictions** based on time series and regression models.  
-- **Purchase Order Report** with detailed ingredient requirements.  
-- Improved **inventory efficiency** — reducing waste and preventing shortages.  
+**From your results:**  
+- **Prophet (9.75%)** performed the best → good choice for handling seasonality + weekly patterns in pizza demand.  
+- **SARIMA (10.76%)** is close, so it’s also reliable.  
+- **Random Forest (11.28%)** is slightly worse here, likely because we didn’t add many external features (like promotions, holidays, weather).
 
----
-
-## Observations  
-- **ARIMA/SARIMA** → Works well for short-term seasonality but struggles with irregular holiday effects.  
-- **Prophet** → Handles seasonality and holidays better, producing more stable forecasts.  
-- **LSTM** → Captures complex non-linear patterns but requires large amounts of data and tuning.  
-- **Regression Models** → Useful as a baseline, but limited in handling temporal dependencies.  
-
-👉 Overall, **Prophet** performed best in this project due to its ability to handle multiple seasonalities and holiday effects, while **LSTM** showed potential but required more computational resources.  
+| Model             | MAPE (%) | Notes                                                                                                                                 |
+| ----------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prophet**       | 9.75     | ✅ Best performer; handles **seasonality** and **weekly trends** well. Ideal for pizza demand with predictable patterns.               |
+| **SARIMA**        | 10.76    | Good performance; can capture **trend + seasonality**, but slightly behind Prophet. Reliable for short-term forecasts.                |
+| **Random Forest** | 11.28    | Slightly worse; likely due to **limited external features** (e.g., promotions, holidays, weather). Works better with richer datasets. |
 
 ---
 
