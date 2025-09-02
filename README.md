@@ -69,6 +69,16 @@ The system should:
 
 ---
 
+## Observations  
+- **ARIMA/SARIMA** → Works well for short-term seasonality but struggles with irregular holiday effects.  
+- **Prophet** → Handles seasonality and holidays better, producing more stable forecasts.  
+- **LSTM** → Captures complex non-linear patterns but requires large amounts of data and tuning.  
+- **Regression Models** → Useful as a baseline, but limited in handling temporal dependencies.  
+
+👉 Overall, **Prophet** performed best in this project due to its ability to handle multiple seasonalities and holiday effects, while **LSTM** showed potential but required more computational resources.  
+
+---
+
 ## Technical Tags  
 `Data Cleaning` · `EDA` · `Time Series Forecasting` · `Predictive Modeling` · `Inventory Management`  
 `Python` · `Pandas` · `Scikit-learn` · `ARIMA` · `SARIMA` · `Prophet` · `LSTM` · `Matplotlib` · `Seaborn`  
