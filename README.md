@@ -1,5 +1,7 @@
 # Dominos - Predictive Purchase Order System  
 
+![](https://github.com/BERLINSAMUELRAJ/Dominos---Predictive-Purchase/blob/main/481661596_122210809634205100_6870617675683039272_n.jpg)
+
 ## Project Overview  
 This project focuses on building a **Predictive Purchase Order System** for **Dominos**. The goal is to optimize the ingredient ordering process by predicting future pizza sales and generating accurate purchase orders. By forecasting sales, Dominos can ensure optimal ingredient availability, reduce waste, and avoid stockouts — directly improving customer satisfaction and operational efficiency.  
 
@@ -22,7 +24,10 @@ This project focuses on building a **Predictive Purchase Order System** for **Do
 
 ---
 
-## Problem Statement  
+## Problem Statement
+
+![](https://github.com/BERLINSAMUELRAJ/Dominos---Predictive-Purchase/blob/main/dominos%20pizza%20tracker.webp)
+
 Dominos wants to optimize its **inventory management** by predicting future pizza sales and generating purchase orders for required ingredients.  
 The system should:  
 - Forecast sales using historical sales data.  
@@ -62,7 +67,10 @@ The system should:
 
 ---
 
-## Results  
+## Results
+
+![](https://github.com/BERLINSAMUELRAJ/Dominos---Predictive-Purchase/blob/main/order-Domino%E2%80%99s-Pizza-with-technology-2.jpg)
+
 - **Accurate sales predictions** based on time series and regression models.  
 - **Purchase Order Report** with detailed ingredient requirements.  
 - Improved **inventory efficiency** — reducing waste and preventing shortages.  
